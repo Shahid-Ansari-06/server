@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server Check</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div id="content" style="display:none;">
+        <!-- Your HTML content goes here -->
+        <h1>Welcome to the correct server!</h1>
+        <p>Your HTML content is running here.</p>
+    </div>
+
+    <div id="sorryMessage">
+        <h1>Sorry</h1>
+        <p>You are not on the correct server.</p>
+    </div>
+
+    <script>
+        // Check if the current location matches the specified server
+        if (window.location.hostname === 'coding-studios.netlify.app') {
+            document.getElementById('content').style.display = 'block';
+            document.getElementById('sorryMessage').style.display = 'none';
+        } else {
+            document.getElementById('content').style.display = 'none';
+            document.getElementById('sorryMessage').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
