@@ -3,35 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Server Check</title>
+    <title>Server Restriction</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
             padding: 50px;
         }
+        #sorryMessage {
+            color: red;
+        }
+        #content {
+            color: green;
+        }
     </style>
 </head>
 <body>
     <div id="content" style="display:none;">
         <!-- Your HTML content goes here -->
-        <h1>Welcome to the correct server!</h1>
-        <p>Your HTML content is running here.</p>
+        <h1>Welcome to the allowed server!</h1>
+        <p>Your content is running on a valid server.</p>
     </div>
 
     <div id="sorryMessage">
         <h1>Sorry</h1>
-        <p>You are not on the correct server.</p>
+        <p>This server is not allowed.</p>
     </div>
 
     <script>
-        // Check if the current location matches the specified server
-        if (window.location.hostname === 'https://shahid-ansari-06.github.io/server/') {
-            document.getElementById('content').style.display = 'block';
-            document.getElementById('sorryMessage').style.display = 'none';
-        } else {
+        // Block ports in the range 3000 to 5000
+        const blockedHostname = '127.0.0.1';
+        const blockedPortStart = 3000;
+        const blockedPortEnd = 5000;
+        const currentPort = window.location.port;
+
+        if (window.location.hostname === blockedHostname && currentPort >= blockedPortStart && currentPort <= blockedPortEnd) {
+            // Show the "Sorry" message if the port is in the blocked range
             document.getElementById('content').style.display = 'none';
             document.getElementById('sorryMessage').style.display = 'block';
+        } else {
+            // Show the main content for all other servers and ports
+            document.getElementById('content').style.display = 'block';
+            document.getElementById('sorryMessage').style.display = 'none';
         }
     </script>
 </body>
